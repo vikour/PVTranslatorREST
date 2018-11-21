@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Test PV-Translator</title>
+    </h:head>
+    <h:body>        
+        <h2>Test del servicio web -> PVTranslator </h2>
+    
+        
+      <!-- botones de las campañas -->
+        <br/>
+        
+        <h:form>
+            <h5>Muestra todas los módulos (findAll)</h5>
+            <h:commandButton action="#{indexBean.doFindAllModulo()}" value="Pulsa"/>
+        </h:form>
+        
+        <br/>
+        
+        <h:form>
+            <h5>Muestra todas los módulos ordenados por alpha</h5>
+            <h:commandButton action="#{indexBean.doFindAllModuloOrderedByAlpha()}" value="Pulsa"/>
+        </h:form>
+        
+        <br/>
+        
+        <h:form>
+            <h5>Muestra todas los módulos ordenados por beta</h5>
+            <h:commandButton action="#{indexBean.doFindAllModuloOrderedByBeta()}" value="Pulsa"/>
+        </h:form>
+        
+        <br/>
+        
+        <h:form>
+            <h5>Muestra todas los módulos ordenados por gamma</h5>
+            <h:commandButton action="#{indexBean.doFindAllModuloOrderedByGamma()}" value="Pulsa"/>
+        </h:form>
+        
+        <br/>
+        
+        <h:form>
+            <h5>Muestra todas los módulos ordenados por kappa</h5>
+            <h:commandButton action="#{indexBean.doFindAllModuloOrderedByKappa()}" value="Pulsa"/>
+        </h:form>
+        
+        <br/>
+        
+        <h:form>
+            <h5>Muestra todas los módulos ordenados por nombre</h5>
+            <h:commandButton action="#{indexBean.doFindAllModuloOrderedByName()}" value="Pulsa"/>
+        </h:form>
+        
+        <br/>
+        
+        <h:form>
+            <h5>Muestra el modulo con el nombre indicado</h5>
+            <p> Nombre: <h:inputText value="#{indexBean.nombreModulo}"/> </p>
+            <h:commandButton action="#{indexBean.doFindModuloByNombre()}" value="Pulsa"/>
+        </h:form>
+        
+        <br/>
+        
+        <h:form>
+            <h5>Muestra el modulo del la campaña seleccionada</h5>
+            <h:selectOneMenu value="#{indexBean.campanyaSeleccionada}">
+                <f:selectItems value="#{indexBean.campanyas}" var="c"
+                               itemLabel="#{c.nombre}" itemValue="#{c.nombre}" />
+            </h:selectOneMenu><br/>
+            <h:commandButton action="#{indexBean.doFindModuloByCampanya()}" value="Pulsa"/>
+        </h:form>
+        
+        
+       
+      <!-- botones de las campañas -->
+        <br/>
+        
+        <h:form>
+            <h5>Muestra todas las campañas (findAll)</h5>
+            <h:commandButton action="#{indexBean.doFindAllCampanyas()}" value="Pulsa"/>
+        </h:form>
+        
+        <br/>
+        
+        <h:form>
+            <h5>Muestra todas las campañas ordenadas por fechas ascendente</h5>
+            <h:commandButton action="#{indexBean.doFindAllCampanyaOrderedByDateAsc()}" value="Pulsa"/>
+        </h:form>
+        
+        <br/>
+        
+        <h:form>
+            <h5>Muestra todas las campañas ordenadas por fechas descendente</h5>
+            <h:commandButton action="#{indexBean.doFindAllCampanyaOrderedByDateDesc()}" value="Pulsa"/>
+        </h:form>
+        
+        <br/>
+        
+        <h:form>
+            <h5>Muestra todas las campañas ordenadas nombre</h5>
+            <h:commandButton action="#{indexBean.doFindAllCampanyaOrderedByName()}" value="Pulsa"/>
+        </h:form>
+        
+        <br/>
+        
+        <h:form>
+            <h5>Muestra la campaña con el nombre indicado</h5>
+            <p> Nombre: <h:inputText value="#{indexBean.nombreCampanya}"/> </p>
+            <h:commandButton action="#{indexBean.doFindCampanya()}" value="Pulsa"/>
+        </h:form>
+        
+        <br/>
+        
+        <h:form>
+            <h5>Muestra las campañas del modulo seleccionado</h5>
+            <h:selectOneMenu value="#{indexBean.moduloSeleccionado}">
+                <f:selectItems value="#{indexBean.modulos}" var="m"
+                               itemLabel="#{m.nombre}" itemValue="#{m.nombre}" />
+            </h:selectOneMenu><br/>
+            <h:commandButton action="#{indexBean.doFindCampanyaByModulo()}" value="Pulsa"/>
+        </h:form>
+        
+    </h:body>
+</html>
+
