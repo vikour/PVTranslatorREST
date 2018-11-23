@@ -8,73 +8,112 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        
-        <ui:composition template="templates/common.xhtml">
+
+        <ui:composition template="resources/templates/common.xhtml">
             <ui:define name="header">
                 <h2>Modulos</h2>
             </ui:define>
             <ui:define name="content">
                 <h:form>
-                    <div class="table-wrapper-scroll-y">
-                    <h:dataTable value="#{homeBeans.modulos}"
-                                 var="modulo"
-                                 class="table"
-                                 headerClass="text-center"
-                                 rowClasses="text-center" id="tabla">
+                    <div class="table-responsive no-more-than-60p">
+                        <h:dataTable value="#{homeBeans.modulos}"
+                                     var="modulo"
+                                     class="table"
+                                     columnClasses="align-middle,
+                                                    align-middle,
+                                                    align-middle 
+                                                    d-none d-md-table-cell,
+                                                    align-middle d-none d-md-table-cell,
+                                                    align-middle  d-none d-md-table-cell,
+                                                    align-middle d-none d-md-table-cell"
+                                     headerClass="text-center"
+                                     rowClasses="text-center" id="tabla">
 
-                        <h:column>
-                            <f:facet name="header"></f:facet>
-                            <h:commandLink type="button" class="btn btn-secondary" action="#{homeBeans.goCampanya(modulo)}" value="Campañas"/>
-                            
-                        </h:column>
-                        
-                        <h:column>
-                            <f:facet name="header">Nombre</f:facet>
-                            #{modulo.nombre}
-                        </h:column>
+                            <h:column>
+                                <f:facet name="header"></f:facet>
+                                <h:commandLink type="link" class="text-secundary" 
+                                               action="#{homeBeans.goCampanya(modulo)}" 
+                                               value="Campañas"/>
 
-                        <h:column>
-                            <f:facet name="header">Alpha</f:facet>
-                            #{modulo.alpha}
-                        </h:column>
+                            </h:column>
 
-                        <h:column>
-                            <f:facet name="header">Beta</f:facet>
-                            #{modulo.beta}
-                        </h:column>
+                            <h:column>
+                                <f:facet name="header">Nombre</f:facet>
+                                    #{modulo.nombre}
+                            </h:column>
 
-                        <h:column>
-                            <f:facet name="header">Gamma</f:facet>
-                            #{modulo.gamma}
-                        </h:column>
+                            <h:column headerClass="d-none d-md-table-cell">
+                                <f:facet name="header">Alpha</f:facet>
+                                <h:outputText value="#{modulo.alpha}">
+                                    <f:convertNumber minFractionDigits="2"/>
+                                </h:outputText>
+                            </h:column>
 
-                        <h:column>
-                            <f:facet name="header">Kappa</f:facet>
-                            #{modulo.kappa}
-                        </h:column>
+                            <h:column headerClass="d-none d-md-table-cell">
+                                <f:facet name="header">Beta</f:facet>
+                                <h:outputText value="#{modulo.beta}">
+                                    <f:convertNumber minFractionDigits="2"/>
+                                </h:outputText>
+                            </h:column>
 
-                        <h:column class="mr-auto">
-                            <f:facet name="header"></f:facet>
-                            <h:commandLink type="button" class="btn btn-secondary" action="#{homeBeans.doEditar(modulo)}" value="Editar"/>
-                            <h:commandLink type="button" class="btn btn-danger" action="#{homeBeans.doBorrar(modulo)}" value="Borrar">
-                                <f:ajax render="@form" execute="@form"/>
-                            </h:commandLink>
-                            
-                        </h:column>
+                            <h:column headerClass="d-none d-md-table-cell">
+                                <f:facet name="header">Gamma</f:facet>
+                                <h:outputText value="#{modulo.gamma}">
+                                    <f:convertNumber minFractionDigits="2"/>
+                                </h:outputText>
+                            </h:column>
 
-                    </h:dataTable>
+                            <h:column headerClass="d-none d-md-table-cell">
+                                <f:facet name="header">Kappa</f:facet>
+                                <h:outputText value="#{modulo.kappa}">
+                                    <f:convertNumber minFractionDigits="2"/>
+                                </h:outputText>
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header"></f:facet>
+                                <h:commandLink class="btn btn-secondary rounded" 
+                                               action="#{homeBeans.doEditar(modulo)}">
+                                    <span class="material-icons align-middle">edit</span>
+                                    <span class="d-none d-md-inline">Editar</span>
+                                </h:commandLink>
+                                <h:commandLink class="btn btn-danger rounded"
+                                               action="#{homeBeans.doBorrar(modulo)}" >
+                                    <f:ajax render="@form" execute="@form"/>
+                                    <span class="material-icons align-middle">
+                                        remove
+                                    </span>
+                                    <span class="d-none d-md-inline-block align-middle">Borrar</span>
+                                </h:commandLink>
+
+                            </h:column>
+
+                        </h:dataTable>
                     </div>
-                
-                <p>
-                    <h:commandLink type="button" class="btn btn-primary" action="#{homeBeans.doNew()}" value="Nuevo"/>
-                   
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                        Importar
-                    </button>
-                    <h:messages style="color: red;" />
-                </p>
+
+                    <p>
+                        <h:commandLink type="link" class="btn btn-primary rounded" 
+                                       action="#{homeBeans.doNew()}">
+                            <span class="material-icons align-middle">
+                                add
+                            </span>
+                            <span class="d-none d-md-inline-block align-middle">Nuevo</span>
+                        </h:commandLink>
+
+                        <button type="button" 
+                                class="btn btn-primary" 
+                                data-toggle="modal" 
+                                data-target="#exampleModal"> 
+                            <span class="material-icons align-middle">
+                                import_export
+                            </span>
+                            <span class="d-none d-md-inline-block align-middle">Importar</span>
+
+                        </button>
+                        <h:messages style="color: red;" />
+                    </p>
                 </h:form>
-                
+
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">

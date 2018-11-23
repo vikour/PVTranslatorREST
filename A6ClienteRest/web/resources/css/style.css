@@ -13,9 +13,23 @@ tr th:last-child, tr td:last-child {
 
 #main-content {
     background-color: #fff;
-    margin-top: 20px;
-    padding-bottom: 20px;
-    min-width: 500px;
+}
+
+a {
+    font-weight: bold;
+}
+
+.max-h-500 {
+    max-height: 500px;
+}
+
+.no-more-than-60p {
+    max-height: 60%;
+}
+
+.fill {
+    min-height: 100%;
+    height: 100%;
 }
 
 h1,h2,h3,h4,h5,h6 {
