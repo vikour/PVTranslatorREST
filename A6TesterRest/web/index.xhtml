@@ -62,18 +62,8 @@
         </h:form>
         
         <br/>
+                
         
-        <h:form>
-            <h5>Muestra el modulo del la campaña seleccionada</h5>
-            <h:selectOneMenu value="#{indexBean.campanyaSeleccionada}">
-                <f:selectItems value="#{indexBean.campanyas}" var="c"
-                               itemLabel="#{c.nombre}" itemValue="#{c.nombre}" />
-            </h:selectOneMenu><br/>
-            <h:commandButton action="#{indexBean.doFindModuloByCampanya()}" value="Pulsa"/>
-        </h:form>
-        
-        
-       
       <!-- botones de las campañas -->
         <br/>
         
@@ -108,6 +98,7 @@
         <h:form>
             <h5>Muestra la campaña con el nombre indicado</h5>
             <p> Nombre: <h:inputText value="#{indexBean.nombreCampanya}"/> </p>
+            <p> Modulo: <h:inputText value="#{indexBean.nombreModulo}"/> </p>
             <h:commandButton action="#{indexBean.doFindCampanya()}" value="Pulsa"/>
         </h:form>
         

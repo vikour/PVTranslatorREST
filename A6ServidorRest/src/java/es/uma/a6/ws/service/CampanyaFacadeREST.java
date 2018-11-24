@@ -5,8 +5,8 @@
  */
 package es.uma.a6.ws.service;
 
-import es.uma.a6.ws.Campanya;
-import es.uma.a6.ws.CampanyaPK;
+import es.uma.a6.entitys.Campanya;
+import es.uma.a6.entitys.CampanyaPK;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -42,7 +42,7 @@ public class CampanyaFacadeREST extends AbstractFacade<Campanya> {
          * it is ignored in the following code.
          * Matrix parameters are used as field names to build a primary key instance.
          */
-        es.uma.a6.ws.CampanyaPK key = new es.uma.a6.ws.CampanyaPK();
+        es.uma.a6.entitys.CampanyaPK key = new es.uma.a6.entitys.CampanyaPK();
         javax.ws.rs.core.MultivaluedMap<String, String> map = pathSegment.getMatrixParameters();
         java.util.List<String> nombre = map.get("nombre");
         if (nombre != null && !nombre.isEmpty()) {
@@ -76,7 +76,7 @@ public class CampanyaFacadeREST extends AbstractFacade<Campanya> {
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") PathSegment id) {
-        es.uma.a6.ws.CampanyaPK key = getPrimaryKey(id);
+        es.uma.a6.entitys.CampanyaPK key = getPrimaryKey(id);
         super.remove(super.find(key));
     }
 
@@ -84,7 +84,7 @@ public class CampanyaFacadeREST extends AbstractFacade<Campanya> {
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Campanya find(@PathParam("id") PathSegment id) {
-        es.uma.a6.ws.CampanyaPK key = getPrimaryKey(id);
+        es.uma.a6.entitys.CampanyaPK key = getPrimaryKey(id);
         return super.find(key);
     }
 
@@ -124,7 +124,7 @@ public class CampanyaFacadeREST extends AbstractFacade<Campanya> {
     @Path("order/name")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Campanya> findAllOrderedByName(){
-        Query q = em.createQuery("SELECT c FROM Campanya c ORDER BY c.nombre ASC");
+        Query q = em.createQuery("SELECT c FROM Campanya c ORDER BY c.campanyaPK.nombre ASC");
         return q.getResultList();
     }
     
@@ -147,9 +147,9 @@ public class CampanyaFacadeREST extends AbstractFacade<Campanya> {
     @GET
     @Path("modulo/{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Campanya> findByModulo(String nombreModulo){
-        Query q = em.createQuery("SELECT c FROM Campanya c WHERE :n = c.modulo1.nombre");
-        q.setParameter("n", nombreModulo);
+    public List<Campanya> findByModulo(@PathParam("id") String nombreModulo){
+        Query q = em.createQuery("SELECT c FROM Campanya c WHERE :nom = c.campanyaPK.modulo");
+        q.setParameter("nom", nombreModulo);
         return q.getResultList();
     }
     

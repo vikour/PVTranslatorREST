@@ -5,13 +5,13 @@
  */
 package es.uma.a6.beans;
 
-import es.uma.a6.ws.Modulo;
-import es.uma.a6.ws.WSPVTranslator_Service;
+import es.uma.a6.I_pvtranslator.IPVTranslatorServer;
+import es.uma.a6.entitys.Modulo;
+import es.uma.a6.pvtranslator.PVTranslatorServer;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.xml.ws.WebServiceRef;
 
 /**
  *
@@ -21,8 +21,8 @@ import javax.xml.ws.WebServiceRef;
 @RequestScoped
 public class ModuloFormBeans {
 
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/WSPV_Translator/WSPV_Translator.wsdl")
-    private WSPVTranslator_Service service;
+    
+    private IPVTranslatorServer server;
 
     @Inject private ConfigurationSessionBeans sesion;
     boolean creationMode=true;
@@ -42,6 +42,7 @@ public class ModuloFormBeans {
     
     @PostConstruct
     public void init(){
+        server=PVTranslatorServer.getInstance();
         
         errorN="";
         errorA="";
@@ -98,7 +99,7 @@ public class ModuloFormBeans {
     public void comprobarError(){
         if(m.getNombre().equals("")){
             errorN="Error: escriba un nombre para el módulo";
-        }else if(findModuloByNombre(m.getNombre())!=null){
+        }else if(server.findModulo(m.getNombre())!=null){
             errorN="Error: existe un módulo con ese nombre";
         }else{
             errorN="";
@@ -143,10 +144,10 @@ public class ModuloFormBeans {
         String next="";
         if(m.getKappa()>=0 && m.getAlpha()>=0 && m.getBeta()>=0 && m.getGamma()>=0 && !m.getNombre().equals("")){
             if(creationMode==false){                //se modifica el módulo
-                editModulo(m);
+                server.editModulo(m);
                 next="index.xhtml";
-            }else if(findModuloByNombre(m.getNombre())==null){                                  //se crea un nuevo módulo
-                createModulo(m);
+            }else if(server.findModulo(m.getNombre())==null){                                  //se crea un nuevo módulo
+                server.createModulo(m);
                 next="index.xhtml";
             }
         }else{
@@ -158,30 +159,5 @@ public class ModuloFormBeans {
     public String atras(){
         return "index.xhtml";
     }
-    
-
-    private void editModulo(es.uma.a6.ws.Modulo entity) {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        es.uma.a6.ws.WSPVTranslator port = service.getWSPVTranslatorPort();
-        port.editModulo(entity);
-    }
-
-    private void createModulo(es.uma.a6.ws.Modulo entity) {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        es.uma.a6.ws.WSPVTranslator port = service.getWSPVTranslatorPort();
-        port.createModulo(entity);
-    }
-
-    private Modulo findModuloByNombre(java.lang.String nombre) {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        es.uma.a6.ws.WSPVTranslator port = service.getWSPVTranslatorPort();
-        return port.findModuloByNombre(nombre);
-    }
-
-    
-
     
 }

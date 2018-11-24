@@ -5,18 +5,16 @@
  */
 package es.uma.a6.beans.importador;
 
-import es.uma.a6.ws.Campaña;
-import es.uma.a6.ws.Modulo;
+import es.uma.a6.entitys.Campanya;
+import es.uma.a6.entitys.CampanyaPK;
+import es.uma.a6.entitys.Modulo;
+import es.uma.a6.pvtranslator.PVTranslatorServer;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 public class FormatoCampaña extends FormatoFichero{
 
@@ -25,7 +23,7 @@ public class FormatoCampaña extends FormatoFichero{
     @Override
     public Object leer(File file) throws IOException {
         BufferedReader br = null;
-        Campaña campaña = null;
+        Campanya campaña = null;
         
         br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "ISO-8859-15"));
         campaña = leerInfoBasica(br);
@@ -58,10 +56,10 @@ public class FormatoCampaña extends FormatoFichero{
         return "xls";
     }
 
-    private Campaña leerInfoBasica(BufferedReader br) throws IOException {
+    private Campanya leerInfoBasica(BufferedReader br) throws IOException {
         String line;
         Modulo modulo = null;
-        Campaña campaña = null;
+        Campanya campaña = null;
         String value;
 
         line = readNotEmptyLine(br);
@@ -75,32 +73,24 @@ public class FormatoCampaña extends FormatoFichero{
         // leer campaña
         line = readNotEmptyLine(br);
         value = extractValue(line);
-        campaña = crearCampañaSiNoExiste(value, modulo);
+        campaña = crearCampanyaSiNoExiste(value, modulo);
         
         return campaña;
     }
     
-    private Campaña crearCampañaSiNoExiste(String name, Modulo modulo) {
-        Campaña campaña = null;
+    private Campanya crearCampanyaSiNoExiste(String name, Modulo modulo) {
+        Campanya campaña = null;
         
-        campaña = findCampanya(name);
+        campaña = PVTranslatorServer.getInstance().findCampanya(name, modulo.getNombre());
         
         if (campaña == null) {
-            campaña = new Campaña();
+            campaña = new Campanya();
+            campaña.setCampanyaPK(new CampanyaPK(name, modulo.getNombre()));
+            campaña.setModulo1(modulo);
+            campaña.setFecha(new Date());
             
-            campaña.setNombre(name);
-            campaña.setModulo(modulo);
             
-            try {
-            GregorianCalendar gc = new GregorianCalendar();
-            gc.setTime(new Date());
-            campaña.setFecha(DatatypeFactory.newInstance().newXMLGregorianCalendar(gc));
-            }
-            catch (DatatypeConfigurationException ex) {
-                System.out.println("PERNE");
-            }
-            
-            createCampanya(campaña);
+            PVTranslatorServer.getInstance().createCampanya(campaña);
         }
         
         return campaña;
@@ -109,39 +99,15 @@ public class FormatoCampaña extends FormatoFichero{
     private Modulo crearModuloSiNoExiste(String name) {
         Modulo modulo = null;
         
-        modulo = findModuloByNombre(name);
+        modulo = PVTranslatorServer.getInstance().findModulo(name);
         
         if (modulo == null) {
             modulo = new Modulo();
             modulo.setNombre(name);
-            createModulo(modulo);
+            PVTranslatorServer.getInstance().createModulo(modulo);
         }
         
         return modulo;
-    }
-
-    private static Modulo findModuloByNombre(java.lang.String nombre) {
-        es.uma.a6.ws.WSPVTranslator_Service service = new es.uma.a6.ws.WSPVTranslator_Service();
-        es.uma.a6.ws.WSPVTranslator port = service.getWSPVTranslatorPort();
-        return port.findModuloByNombre(nombre);
-    }
-
-    private static void createModulo(es.uma.a6.ws.Modulo entity) {
-        es.uma.a6.ws.WSPVTranslator_Service service = new es.uma.a6.ws.WSPVTranslator_Service();
-        es.uma.a6.ws.WSPVTranslator port = service.getWSPVTranslatorPort();
-        port.createModulo(entity);
-    }
-
-    private static void createCampanya(es.uma.a6.ws.Campaña entity) {
-        es.uma.a6.ws.WSPVTranslator_Service service = new es.uma.a6.ws.WSPVTranslator_Service();
-        es.uma.a6.ws.WSPVTranslator port = service.getWSPVTranslatorPort();
-        port.createCampanya(entity);
-    }
-
-    private static Campaña findCampanya(java.lang.Object id) {
-        es.uma.a6.ws.WSPVTranslator_Service service = new es.uma.a6.ws.WSPVTranslator_Service();
-        es.uma.a6.ws.WSPVTranslator port = service.getWSPVTranslatorPort();
-        return port.findCampanya(id);
     }
 
 }

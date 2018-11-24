@@ -5,7 +5,7 @@
  */
 package es.uma.a6.ws.service;
 
-import es.uma.a6.ws.Modulo;
+import es.uma.a6.entitys.Modulo;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

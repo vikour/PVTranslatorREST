@@ -6,14 +6,14 @@
 package es.uma.a6.beans;
 
 
-import es.uma.a6.ws.Modulo;
-import es.uma.a6.ws.WSPVTranslator_Service;
+import es.uma.a6.I_pvtranslator.IPVTranslatorServer;
+import es.uma.a6.entitys.Modulo;
+import es.uma.a6.pvtranslator.PVTranslatorServer;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.xml.ws.WebServiceRef;
 
 /**
  *
@@ -23,8 +23,7 @@ import javax.xml.ws.WebServiceRef;
 @RequestScoped
 public class HomeBeans {
 
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/WSPV_Translator/WSPV_Translator.wsdl")
-    private WSPVTranslator_Service service;
+    private IPVTranslatorServer server;
 
     @Inject ConfigurationSessionBeans config;
     
@@ -49,9 +48,9 @@ public class HomeBeans {
 
     @PostConstruct
     public void initialize() {
-
+        server = PVTranslatorServer.getInstance();
         config.setModulo(null);
-        modulos = findAllModulo();
+        modulos = server.findAllModulo();
 
     }
     
@@ -73,8 +72,8 @@ public class HomeBeans {
     
     public void doBorrar(Modulo m){
         
-        removeModulo(m);
-        modulos=findAllModulo();
+        server.removeModulo(m);
+        modulos=server.findAllModulo();
         //return "index.xhtml";
         
     }
@@ -97,18 +96,5 @@ public class HomeBeans {
         return "campanyas.xhtml";
     }
 
-    private java.util.List<es.uma.a6.ws.Modulo> findAllModulo() {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        es.uma.a6.ws.WSPVTranslator port = service.getWSPVTranslatorPort();
-        return port.findAllModulo();
-    }
-
-    private void removeModulo(es.uma.a6.ws.Modulo entity) {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        es.uma.a6.ws.WSPVTranslator port = service.getWSPVTranslatorPort();
-        port.removeModulo(entity);
-    }
 
 }

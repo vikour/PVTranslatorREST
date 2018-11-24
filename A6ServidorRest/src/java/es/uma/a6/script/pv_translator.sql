@@ -24,7 +24,7 @@ INSERT INTO modulo VALUES
 ('modulo2', 0.7, 1, 4.3, 3),
 ('modulo4', 0.9, 2, 5.9, 2);
 
-INSERT INTO campanyaa VALUES
+INSERT INTO campanya VALUES
 ('campaña11', '2018-02-02','modulo1'),
 ('campaña12', '2017-03-04','modulo1'),
 ('campaña13', '2018-04-06','modulo1'),
