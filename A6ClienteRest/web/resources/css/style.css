@@ -1,7 +1,25 @@
 /*
     Created on : 10-nov-2018, 14:26:49
     Author     : vikour
+
+    Imported font from google:
+    font-family: 'Chakra Petch', sans-serif;
+    font-family: 'Fira Sans', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
 */
+
+
+h1,h2,h3,h4,h5,h6,th {
+    font-family: 'Chakra Petch', sans-serif;
+}
+
+a, button {
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+p,td, input {
+    font-family: 'Fira Sans', sans-serif;
+}
 
 body {
     background-color: #E5E8E8;
@@ -19,8 +37,8 @@ a {
     font-weight: bold;
 }
 
-.max-h-500 {
-    max-height: 500px;
+.alert {
+    list-style: none !important;
 }
 
 .no-more-than-60p {
