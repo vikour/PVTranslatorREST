@@ -6,7 +6,7 @@
 package es.uma.a6.beans.importador;
 
 import es.uma.a6.entitys.Modulo;
-import es.uma.a6.pvtranslator.PVTranslatorServer;
+import es.uma.a6.service.pvtranslator.PVTranslatorServer;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;

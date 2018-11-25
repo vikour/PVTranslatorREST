@@ -5,9 +5,9 @@
  */
 package es.uma.a6.beans;
 
-import es.uma.a6.I_pvtranslator.IPVTranslatorServer;
+import es.uma.a6.service.I_pvtranslator.IPVTranslatorServer;
 import es.uma.a6.entitys.Modulo;
-import es.uma.a6.pvtranslator.PVTranslatorServer;
+import es.uma.a6.service.pvtranslator.PVTranslatorServer;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;

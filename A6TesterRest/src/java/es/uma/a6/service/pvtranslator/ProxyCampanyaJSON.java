@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package es.uma.a6.pvtranslator;
+package es.uma.a6.service.pvtranslator;
 
-import es.uma.a6.I_pvtranslator.ICampanyaOperation;
+import es.uma.a6.service.I_pvtranslator.ICampanyaOperation;
 import es.uma.a6.entitys.Campanya;
 import es.uma.a6.entitys.Modulo;
-import es.uma.a6.service.CampanyaRest;
+import es.uma.a6.service.rest.CampanyaRest;
 import java.util.List;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package es.uma.a6.I_pvtranslator;
+package es.uma.a6.service.I_pvtranslator;
 
+import es.uma.a6.entitys.Campanya;
 import es.uma.a6.entitys.Modulo;
 import java.util.List;
 
@@ -35,17 +36,13 @@ public interface IModuloOperation {
 
     Modulo find(String nombre);
     
-    
+    List<Modulo> findByNombreCampaña(String c);
+     
     List<Modulo> findRange(int from, int to);
-    
     
     void create(Modulo m);
     
-    
     void edit(Modulo m);
     
-    
     void remove(Modulo m);
-    
-
 }

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package es.uma.a6.pvtranslator;
+package es.uma.a6.service.pvtranslator;
 
-import es.uma.a6.I_pvtranslator.IPVTranslatorServer;
+import es.uma.a6.service.I_pvtranslator.IPVTranslatorServer;
 import es.uma.a6.entitys.Campanya;
 import es.uma.a6.entitys.Modulo;
 import java.util.List;
@@ -56,6 +56,11 @@ public class PVTranslatorServer extends IPVTranslatorServer{
     @Override
     public List<Modulo> findAllModulo() {
         return modulo.findAll();
+    }
+    
+    @Override
+    public List<Modulo> findModuloByNombreCampaña(String c) {
+        return modulo.findByNombreCampaña(c);
     }
 
     @Override

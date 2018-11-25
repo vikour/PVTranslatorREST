@@ -5,7 +5,7 @@
  */
 package es.uma.a6.beans;
 
-import es.uma.a6.I_pvtranslator.IPVTranslatorServer;
+import es.uma.a6.service.I_pvtranslator.IPVTranslatorServer;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -14,10 +14,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import es.uma.a6.entitys.Campanya;
 import es.uma.a6.entitys.Modulo;
-import es.uma.a6.pvtranslator.PVTranslatorServer;
-import es.uma.a6.service.CampanyaRest;
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.Response;
+import es.uma.a6.service.pvtranslator.PVTranslatorServer;
 
 /**
  *
@@ -123,6 +120,10 @@ public class IndexBean {
     
     
     
+    
+    
+    
+    
     public String doFindAllCampanyas(){
         sessionBean.setListaCampanyas(server.findAllCampanya());
         return "campanya.xhtml";
@@ -186,6 +187,10 @@ public class IndexBean {
         
     }
     
+    public String doFindModuloByCampanya(){
+        sessionBean.setListaModulos(server.findModuloByNombreCampaña(nombreCampanya));
+        return "modulo.xhtml";
+    }
     
     public String doFindModuloByNombre(){
         List<Modulo> lista= new ArrayList();

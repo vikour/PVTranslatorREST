@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package es.uma.a6.service;
+package es.uma.a6.service.rest;
 
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;

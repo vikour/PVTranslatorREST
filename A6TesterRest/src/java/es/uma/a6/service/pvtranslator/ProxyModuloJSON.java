@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package es.uma.a6.pvtranslator;
+package es.uma.a6.service.pvtranslator;
 
-import es.uma.a6.I_pvtranslator.IModuloOperation;
+import es.uma.a6.service.I_pvtranslator.IModuloOperation;
 import es.uma.a6.entitys.Modulo;
-import es.uma.a6.service.ModuloRest;
+import es.uma.a6.service.rest.ModuloRest;
 import java.util.List;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
@@ -150,6 +150,22 @@ public class ProxyModuloJSON implements IModuloOperation{
         clientModulo.close();
         return modulo;
     }
+    
+    @Override
+    public List<Modulo> findByNombreCampaña(String c) {
+        clientModulo = new ModuloRest();
+        Response r = clientModulo.findModulosByNombreCampaña_JSON(Response.class, c);
+        
+        List<Modulo> lista = null;
+        if (r.getStatus() == 200) {
+            GenericType<List<Modulo>> genericType = new GenericType<List<Modulo>>(){};
+            lista = r.readEntity(genericType); 
+        }
+        
+        clientModulo.close();
+        return lista;
+    }
+    
 
     @Override
     public List<Modulo> findRange(int from, int to) {
@@ -190,5 +206,6 @@ public class ProxyModuloJSON implements IModuloOperation{
         clientModulo.remove(m.getNombre());
         clientModulo.close();
     }
+
     
 }
