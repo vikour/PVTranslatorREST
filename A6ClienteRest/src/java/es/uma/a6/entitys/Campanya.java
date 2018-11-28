@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package es.uma.a6.ws;
+package es.uma.a6.entitys;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -109,7 +109,7 @@ public class Campanya implements Serializable {
 
     @Override
     public String toString() {
-        return "es.uma.a6.ws.Campanya[ campanyaPK=" + campanyaPK + " ]";
+        return "es.uma.a6.entitys.Campanya[ campanyaPK=" + campanyaPK + " ]";
     }
     
 }

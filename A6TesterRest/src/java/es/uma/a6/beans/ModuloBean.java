@@ -5,7 +5,7 @@
  */
 package es.uma.a6.beans;
 
-import WebService.Modulo;
+import es.uma.a6.entitys.Modulo;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;

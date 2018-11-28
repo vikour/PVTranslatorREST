@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package es.uma.a6.ws;
+package es.uma.a6.entitys;
 
 import java.io.Serializable;
 import java.util.Collection;

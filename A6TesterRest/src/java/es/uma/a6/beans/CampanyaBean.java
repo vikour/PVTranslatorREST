@@ -5,13 +5,12 @@
  */
 package es.uma.a6.beans;
 
-import WebService.Campaña;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import es.uma.a6.entitys.Campanya;
 
 /**
  *
@@ -24,7 +23,7 @@ public class CampanyaBean {
     @Inject
     private SessionBean sesion;
     
-    private List<Campaña> campanyas;
+    private List<Campanya> campanyas;
 
     /**
      * Creates a new instance of CampanyaBean
@@ -37,7 +36,7 @@ public class CampanyaBean {
        campanyas=sesion.getListaCampanyas();
     }
 
-    public List<Campaña> getCampanyas() {
+    public List<Campanya> getCampanyas() {
         return campanyas;
     }
     

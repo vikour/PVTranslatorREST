@@ -6,15 +6,15 @@
 package es.uma.a6.beans;
 
 
-import es.uma.a6.ws.Campaña;
-import es.uma.a6.ws.Modulo;
-import es.uma.a6.ws.WSPVTranslator_Service;
+import es.uma.a6.service.I_pvtranslator.IPVTranslatorServer;
+import es.uma.a6.entitys.Campanya;
+import es.uma.a6.entitys.Modulo;
+import es.uma.a6.service.pvtranslator.PVTranslatorServer;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.xml.ws.WebServiceRef;
 
 /**
  *
@@ -24,77 +24,48 @@ import javax.xml.ws.WebServiceRef;
 @RequestScoped
 public class CampanyasBeans {
 
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/WSPV_Translator/WSPV_Translator.wsdl")
-    private WSPVTranslator_Service service;
     
     @Inject
     private ConfigurationSessionBeans sesion;
     
+    private IPVTranslatorServer server;
+    
     private Modulo modulo;
-    private List<Campaña> campañas;
+    private List<Campanya> campañas;
     
     public CampanyasBeans() {
     }
     
     @PostConstruct
     public void init(){
+        server=PVTranslatorServer.getInstance();
         
         modulo = sesion.getModulo();
-        campañas= this.findCampanyaByModulo(modulo);
-        //campañas = this.findAllCampanya(); //pruebas
+        campañas= server.findCampanyaByModulo(modulo);
+        
     }
 
     public Modulo getModulo() {
         return modulo;
     }
 
-    public List<Campaña> getCampañas() {
+    public List<Campanya> getCampañas() {
         return campañas;
     }
     
-    public void doRemove(Campaña c){
+    public void doRemove(Campanya c){
         campañas.remove(c);
-        this.removeCampanya(c);        
+        server.removeCampanya(c);        
     }
     
     public String doAtras(){
         return "index.xhtml";
     }
     
-    public String doVer(Campaña c){
+    public String doVer(Campanya c){
         // Not Implemented yet
         return null;
     }
     
-    
-    
-    
-    
-    /*
-        WS
-    */
-
-    private java.util.List<es.uma.a6.ws.Campaña> findCampanyaByModulo(es.uma.a6.ws.Modulo m) {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        es.uma.a6.ws.WSPVTranslator port = service.getWSPVTranslatorPort();
-        return port.findCampanyaByModulo(m);
-    }
-
-    
-    private void removeCampanya(es.uma.a6.ws.Campaña entity) {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        es.uma.a6.ws.WSPVTranslator port = service.getWSPVTranslatorPort();
-        port.removeCampanya(entity);
-    }    
-    
-    /*
-    private java.util.List<es.uma.a6.ws.Campaña> findAllCampanya() {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        es.uma.a6.ws.WSPVTranslator port = service.getWSPVTranslatorPort();
-        return port.findAllCampanya();
-    }
-    */
+   
 }

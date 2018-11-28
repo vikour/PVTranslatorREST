@@ -6,9 +6,8 @@
 package es.uma.a6.beans;
 
 
-
-import WebService.Campaña;
-import WebService.Modulo;
+import es.uma.a6.entitys.Campanya;
+import es.uma.a6.entitys.Modulo;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -24,7 +23,7 @@ import javax.annotation.PostConstruct;
 @Named(value = "sessionBean")
 @SessionScoped
 public class SessionBean implements Serializable {
-    private List<Campaña> listaCampanyas;
+    private List<Campanya> listaCampanyas;
     private List<Modulo> listaModulos;
 
     /**
@@ -38,11 +37,11 @@ public class SessionBean implements Serializable {
         listaCampanyas= new ArrayList<>();
         listaModulos= new ArrayList<>();
     }
-    public List<Campaña> getListaCampanyas() {
+    public List<Campanya> getListaCampanyas() {
         return listaCampanyas;
     }
 
-    public void setListaCampanyas(List<Campaña> listaCampanyas) {
+    public void setListaCampanyas(List<Campanya> listaCampanyas) {
         this.listaCampanyas = listaCampanyas;
     }
 

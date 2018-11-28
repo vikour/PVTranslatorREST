@@ -5,20 +5,14 @@
  */
 package es.uma.a6.beans.importador;
 
-import es.uma.a6.ws.Modulo;
+import es.uma.a6.entitys.Modulo;
+import es.uma.a6.service.pvtranslator.PVTranslatorServer;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.util.NoSuchElementException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -40,11 +34,11 @@ public class FormatoModulo extends FormatoFichero {
         m = construirMod(br);
 
         // comunicación con server.
-        Modulo mserver = findModuloByNombre(m.getNombre());
+        Modulo mserver = PVTranslatorServer.getInstance().findModulo(m.getNombre());
         if (mserver != null) {
-            editModulo(m);
+            PVTranslatorServer.getInstance().editModulo(m);
         } else {
-            createModulo(m);
+            PVTranslatorServer.getInstance().createModulo(m);
         }
 
         return m;
@@ -120,24 +114,6 @@ public class FormatoModulo extends FormatoFichero {
     @Override
     public String getExtension() {
         return "dat"; 
-    }
-
-    private static Modulo findModuloByNombre(java.lang.String nombre) {
-        es.uma.a6.ws.WSPVTranslator_Service service = new es.uma.a6.ws.WSPVTranslator_Service();
-        es.uma.a6.ws.WSPVTranslator port = service.getWSPVTranslatorPort();
-        return port.findModuloByNombre(nombre);
-    }
-
-    private static void createModulo(es.uma.a6.ws.Modulo entity) {
-        es.uma.a6.ws.WSPVTranslator_Service service = new es.uma.a6.ws.WSPVTranslator_Service();
-        es.uma.a6.ws.WSPVTranslator port = service.getWSPVTranslatorPort();
-        port.createModulo(entity);
-    }
-
-    private static void editModulo(es.uma.a6.ws.Modulo entity) {
-        es.uma.a6.ws.WSPVTranslator_Service service = new es.uma.a6.ws.WSPVTranslator_Service();
-        es.uma.a6.ws.WSPVTranslator port = service.getWSPVTranslatorPort();
-        port.editModulo(entity);
     }
     
 }

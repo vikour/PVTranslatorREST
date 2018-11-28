@@ -5,7 +5,8 @@
  */
 package es.uma.a6.ws.service;
 
-import es.uma.a6.ws.Modulo;
+import es.uma.a6.entitys.Campanya;
+import es.uma.a6.entitys.Modulo;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -132,6 +133,15 @@ public class ModuloFacadeREST extends AbstractFacade<Modulo> {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Modulo> findAllOrderedByGamma(){
         Query q = em.createQuery("SELECT m FROM Modulo m ORDER BY m.gamma");
+        return q.getResultList();
+    }
+    
+    @GET
+    @Path("campanya/{id}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Modulo> findModulosByNombreCampaña(@PathParam("id") String nombreCampanya){
+        Query q = em.createQuery("SELECT m FROM Modulo m WHERE :n MEMBER OF (m.campanyaCollection.campanyaPK.nombre)");
+        q.setParameter("n", nombreCampanya);
         return q.getResultList();
     }
     

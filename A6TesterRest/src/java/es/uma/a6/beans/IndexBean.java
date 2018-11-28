@@ -5,17 +5,16 @@
  */
 package es.uma.a6.beans;
 
-import WebService.Campaña;
-import WebService.Modulo;
-import WebService.WSPVTranslator_Service;
-
+import es.uma.a6.service.I_pvtranslator.IPVTranslatorServer;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.xml.ws.WebServiceRef;
+import es.uma.a6.entitys.Campanya;
+import es.uma.a6.entitys.Modulo;
+import es.uma.a6.service.pvtranslator.PVTranslatorServer;
 
 /**
  *
@@ -25,8 +24,6 @@ import javax.xml.ws.WebServiceRef;
 @RequestScoped
 public class IndexBean {
 
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/WSPV_Translator/WSPV_Translator.wsdl")
-    private WSPVTranslator_Service service;
     @Inject
     private SessionBean sessionBean;
     
@@ -34,13 +31,15 @@ public class IndexBean {
     
     private List<Modulo> modulos;
     
-    private List<Campaña> campanyas;
+    private List<Campanya> campanyas;
     
     private String moduloSeleccionado;
     
     private String campanyaSeleccionada;
     
     private String nombreModulo;
+    
+    private IPVTranslatorServer server;
     
 
     /**
@@ -51,9 +50,11 @@ public class IndexBean {
     
     @PostConstruct
     public void init(){
+        server = PVTranslatorServer.getInstance();
+        
         nombreCampanya="";
-        modulos=findAllModulo();
-        campanyas=findAllCampanya();
+        modulos=server.findAllModulo();
+        campanyas=server.findAllCampanya();
         moduloSeleccionado="";
         campanyaSeleccionada="";
         nombreModulo="";
@@ -71,11 +72,11 @@ public class IndexBean {
     
     
 
-    public List<Campaña> getCampanyas() {
+    public List<Campanya> getCampanyas() {
         return campanyas;
     }
 
-    public void setCampanyas(List<Campaña> campanyas) {
+    public void setCampanyas(List<Campanya> campanyas) {
         this.campanyas = campanyas;
     }
     
@@ -119,195 +120,84 @@ public class IndexBean {
     
     
     
+    
+    
+    
+    
     public String doFindAllCampanyas(){
-        sessionBean.setListaCampanyas(findAllCampanya());
+        sessionBean.setListaCampanyas(server.findAllCampanya());
         return "campanya.xhtml";
     }
     
     public String doFindAllCampanyaOrderedByDateAsc(){
-        sessionBean.setListaCampanyas(findAllCampanyaOrderedByDateAsc());
+        sessionBean.setListaCampanyas(server.findAllCampanyaOrderedByDateAsc());
         return "campanya.xhtml";
     }
     
     public String doFindAllCampanyaOrderedByDateDesc(){
-        sessionBean.setListaCampanyas(findAllCampanyaOrderedByDateDesc());
+        sessionBean.setListaCampanyas(server.findAllCampanyaOrderedByDateDesc());
         return "campanya.xhtml";
     }
     public String doFindAllCampanyaOrderedByName(){
-        sessionBean.setListaCampanyas(findAllCampanyaOrderedByName());
+        sessionBean.setListaCampanyas(server.findAllCampanyaOrderedByName());
         return "campanya.xhtml";
     }
     
     public String doFindAllModulo(){
-        sessionBean.setListaModulos(findAllModulo());
+        sessionBean.setListaModulos(server.findAllModulo());
         return "modulo.xhtml";
     }
     
     public String doFindAllModuloOrderedByAlpha(){
-        sessionBean.setListaModulos(findAllModuloOrderedByAlpha());
+        sessionBean.setListaModulos(server.findAllModuloOrderedByAlpha());
         return "modulo.xhtml";
     }
     
     public String doFindAllModuloOrderedByBeta(){
-        sessionBean.setListaModulos(findAllModuloOrderedByBeta());
+        sessionBean.setListaModulos(server.findAllModuloOrderedByBeta());
         return "modulo.xhtml";
     }
     
     public String doFindAllModuloOrderedByGamma(){
-        sessionBean.setListaModulos(findAllModuloOrderedByGamma());
+        sessionBean.setListaModulos(server.findAllModuloOrderedByGamma());
         return "modulo.xhtml";
     }
     
     public String doFindAllModuloOrderedByKappa(){
-        sessionBean.setListaModulos(findAllModuloOrderedByKappa());
+        sessionBean.setListaModulos(server.findAllModuloOrderedByKappa());
         return "modulo.xhtml";
     }
     
     public String doFindAllModuloOrderedByName(){
-        sessionBean.setListaModulos(findAllModuloOrderedByName());
+        sessionBean.setListaModulos(server.findAllModuloOrderedByName());
         return "modulo.xhtml";
     }
     
     public String doFindCampanya(){
-        List<Campaña> lista= new ArrayList();
-        lista.add(findCampanya(nombreCampanya));
+        List<Campanya> lista= new ArrayList();
+        lista.add(server.findCampanya(nombreCampanya, nombreModulo));
         sessionBean.setListaCampanyas(lista);
         return "campanya.xhtml";
     }
     
     public String doFindCampanyaByModulo(){
-        Modulo m= findModuloByNombre(moduloSeleccionado);
-         sessionBean.setListaCampanyas(findCampanyaByModulo(m));
-         return "campanya.xhtml";
-        
-    }
-    
-    public String doFindModuloByNombre(){
-        List<Modulo> lista= new ArrayList();
-        lista.add(findModuloByNombre(nombreModulo));
-        sessionBean.setListaModulos(lista);
-        return "modulo.xhtml";
+        Modulo m= server.findModulo(moduloSeleccionado);
+        sessionBean.setListaCampanyas(server.findCampanyaByModulo(m));
+        return "campanya.xhtml";
         
     }
     
     public String doFindModuloByCampanya(){
-        Campaña c= findCampanya(campanyaSeleccionada);
+        sessionBean.setListaModulos(server.findModuloByNombreCampaña(nombreCampanya));
+        return "modulo.xhtml";
+    }
+    
+    public String doFindModuloByNombre(){
         List<Modulo> lista= new ArrayList();
-        lista.add(findModuloByCampaña(c));
+        lista.add(server.findModulo(nombreModulo));
         sessionBean.setListaModulos(lista);
         return "modulo.xhtml";
         
     }
-
-    private java.util.List<WebService.Campaña> findAllCampanya() {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        WebService.WSPVTranslator port = service.getWSPVTranslatorPort();
-        return port.findAllCampanya();
-    }
-
-    private java.util.List<WebService.Campaña> findAllCampanyaOrderedByDateAsc() {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        WebService.WSPVTranslator port = service.getWSPVTranslatorPort();
-        return port.findAllCampanyaOrderedByDateAsc();
-    }
-
-    private java.util.List<WebService.Campaña> findAllCampanyaOrderedByDateDesc() {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        WebService.WSPVTranslator port = service.getWSPVTranslatorPort();
-        return port.findAllCampanyaOrderedByDateDesc();
-    }
-
-    private java.util.List<WebService.Campaña> findAllCampanyaOrderedByName() {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        WebService.WSPVTranslator port = service.getWSPVTranslatorPort();
-        return port.findAllCampanyaOrderedByName();
-    }
-
-    private java.util.List<WebService.Modulo> findAllModulo() {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        WebService.WSPVTranslator port = service.getWSPVTranslatorPort();
-        return port.findAllModulo();
-    }
-
-    private java.util.List<WebService.Modulo> findAllModuloOrderedByAlpha() {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        WebService.WSPVTranslator port = service.getWSPVTranslatorPort();
-        return port.findAllModuloOrderedByAlpha();
-    }
-
-    private java.util.List<WebService.Modulo> findAllModuloOrderedByBeta() {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        WebService.WSPVTranslator port = service.getWSPVTranslatorPort();
-        return port.findAllModuloOrderedByBeta();
-    }
-
-    private java.util.List<WebService.Modulo> findAllModuloOrderedByGamma() {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        WebService.WSPVTranslator port = service.getWSPVTranslatorPort();
-        return port.findAllModuloOrderedByGamma();
-    }
-
-    private java.util.List<WebService.Modulo> findAllModuloOrderedByKappa() {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        WebService.WSPVTranslator port = service.getWSPVTranslatorPort();
-        return port.findAllModuloOrderedByKappa();
-    }
-
-    private java.util.List<WebService.Modulo> findAllModuloOrderedByName() {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        WebService.WSPVTranslator port = service.getWSPVTranslatorPort();
-        return port.findAllModuloOrderedByName();
-    }
-
-    private Campaña findCampanya(java.lang.Object id) {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        WebService.WSPVTranslator port = service.getWSPVTranslatorPort();
-        return port.findCampanya(id);
-    }
-
-    private java.util.List<WebService.Campaña> findCampanyaByModulo(WebService.Modulo m) {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        WebService.WSPVTranslator port = service.getWSPVTranslatorPort();
-        return port.findCampanyaByModulo(m);
-    }
-
-    private Modulo findModulo(java.lang.Object id) {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        WebService.WSPVTranslator port = service.getWSPVTranslatorPort();
-        return port.findModulo(id);
-    }
-
-    private Modulo findModuloByCampaña(WebService.Campaña c) {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        WebService.WSPVTranslator port = service.getWSPVTranslatorPort();
-        return port.findModuloByCampaña(c);
-    }
-
-    private Modulo findModuloByNombre(java.lang.String nombre) {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        WebService.WSPVTranslator port = service.getWSPVTranslatorPort();
-        return port.findModuloByNombre(nombre);
-    }
-    
-
-    
-    
-    
-    
     
 }
