@@ -27,10 +27,14 @@
                                            class="col-sm-3 col-form-label">
                                         Nombre 
                                     </label>
-                                    <h:inputText class="form-control col-sm-9" id="inputNombre"
+                                    <h:inputText class="form-control col-sm-9" 
+                                                 id="inputNombre"
                                                  value="#{moduloFormBeans.m.nombre}">
-                                        <f:ajax listener="#{moduloFormBeans.comprobarError()}" event="keyup" render="errorN" />
+                                        <f:validator validatorId="es.uma.a6.beans.validators.NombreModuloValidator" />
+                                        <f:attribute name="creationMode" value="#{moduloFormBeans.creationMode}" />
+                                        <f:attribute name="moduloActual" value="#{moduloFormBeans.m}"/>
                                     </h:inputText>
+                                    <h:message for="inputNombre" class="text-danger" />
                                 </div>
                                 
                                 <div class="form-group row">
@@ -38,11 +42,13 @@
                                            class="col-sm-3 col-form-label">
                                         Alpha 
                                     </label>
-                                    <h:inputText class="form-control col-sm-9" id="inputAlpha"
-                                                 value="#{moduloFormBeans.m.alpha}">
-                                        <f:ajax listener="#{moduloFormBeans.comprobarA()}" event="keyup" render="errorA" />
-                                        <h:outputText id="errorA" style="color: red" value="#{moduloFormBeans.errorA}"/>
+                                    <h:inputText class="form-control col-sm-9" 
+                                                 id="inputAlpha"
+                                                 value="#{moduloFormBeans.m.alpha}"
+                                                 validatorMessage="Escribe un número positivo">
+                                        <f:validateDoubleRange minimum="0" />
                                     </h:inputText>
+                                    <h:message for="inputAlpha" class="text-danger" />
                                 </div>
                                 
                                 <div class="form-group row">
@@ -50,11 +56,13 @@
                                            class="col-sm-3 col-form-label">
                                         Beta 
                                     </label>
-                                    <h:inputText class="form-control col-sm-9" id="inputBeta"
-                                                 value="#{moduloFormBeans.m.beta}">
-                                        <f:ajax listener="#{moduloFormBeans.comprobarB()}" event="keyup" render="errorB" />
-                                        <h:outputText id="errorB" style="color: red" value="#{moduloFormBeans.errorB}"/>
+                                    <h:inputText styleClass="form-control col-sm-9" 
+                                                 id="inputBeta"
+                                                 value="#{moduloFormBeans.m.beta}"
+                                                 validatorMessage="Escribe un número positivo">
+                                        <f:validateDoubleRange minimum="0" />
                                     </h:inputText>
+                                    <h:message for="inputBeta" class="text-danger"/>
                                 </div>
                                 
                                 <div class="form-group row">
@@ -62,11 +70,13 @@
                                            class="col-sm-3 col-form-label">
                                         Gamma 
                                     </label>
-                                    <h:inputText class="form-control col-sm-9" id="inputGamma"
-                                                 value="#{moduloFormBeans.m.gamma}">
-                                        <f:ajax listener="#{moduloFormBeans.comprobarG()}" event="keyup" render="errorG" />
-                                        <h:outputText id="errorG" style="color: red" value="#{moduloFormBeans.errorG}"/>
+                                    <h:inputText class="form-control col-sm-9" 
+                                                 id="inputGamma"
+                                                 value="#{moduloFormBeans.m.gamma}"
+                                                 validatorMessage="Escribe un número positivo">
+                                        <f:validateDoubleRange minimum="0" />
                                     </h:inputText>
+                                    <h:message for="inputGamma" class="text-danger"/>
                                 </div>
                                 
                                 <div class="form-group row">
@@ -75,22 +85,24 @@
                                         Kappa 
                                     </label>
                                     <h:inputText class="form-control col-sm-9" id="inputKappa"
-                                                 value="#{moduloFormBeans.m.kappa}">
-                                        <f:ajax listener="#{moduloFormBeans.comprobarK()}" event="keyup" render="errorK" />
-                                        <h:outputText id="errorK" style="color: red" value="#{moduloFormBeans.errorK}"/>
+                                                 value="#{moduloFormBeans.m.kappa}"
+                                                 validatorMessage="Escribe un número positivo">
+                                        <f:validateDoubleRange minimum="0" />
                                     </h:inputText>
+                                    <h:message for="inputKappa" class="text-danger"/>
                                 </div>
-                                
+                            
                                 <h:commandLink   class="btn btn-primary"
                                                  id="botonConfirmar"
                                                  value="Confirmar"
                                                  action="#{moduloFormBeans.doCrearEditar()}">
                                 </h:commandLink>
-                                <h:commandLink   class="btn btn-secondary"
+                                <h:link   class="btn btn-secondary"
                                                  id="botonAtras"
                                                  value="Atras"
-                                                 action="#{moduloFormBeans.atras()}">
-                                </h:commandLink>
+                                                 outcome="index"
+                                                 >
+                                </h:link>
                                 
                             </h:form>
                         </div>
