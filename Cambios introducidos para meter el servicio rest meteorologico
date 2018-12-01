@@ -10,7 +10,7 @@
                 
 -Ha sido creado un nuevo Bean que usara el servicio rest meteorologico y adaptara los datos 
 para ser usados y representados en el index.xhtml
-El nombre es ServicioMeteorologicoBean y esta en Source Packages/es.uma.a6.beans en el proyecto, 
+El nombre es ServicioMeteorologicoBean y esta en A6ClienteRest\Source Packages\es.uma.a6.beans en el proyecto, 
 en github es la carpeta A6ClienteRest\src\java\es\uma\a6\beans
 
 -Ha sido introducido un jar llamado org.jason.jar que es importado desde la carpeta lib y usado en ServicioMeteorologicoBean
