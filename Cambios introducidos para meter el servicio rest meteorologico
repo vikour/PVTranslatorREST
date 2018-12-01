@@ -1,6 +1,4 @@
-index.xhtml
-
--Han sido introducidas ciertas lineas de codigo debajo de la tabla de modulos:
+-Han sido introducidas ciertas lineas de codigo debajo de la tabla de modulos en index.xhtml:
 
                 Ciudad: #{servicioMeteorologicoBean.ciudad}<br/>
                 Tiempo actual: #{servicioMeteorologicoBean.tiempo}<br/>
