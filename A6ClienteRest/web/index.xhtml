@@ -20,12 +20,12 @@
                                      var="modulo"
                                      class="table"
                                      columnClasses="align-middle,
-                                                    align-middle,
-                                                    align-middle 
-                                                    d-none d-md-table-cell,
-                                                    align-middle d-none d-md-table-cell,
-                                                    align-middle  d-none d-md-table-cell,
-                                                    align-middle d-none d-md-table-cell"
+                                     align-middle,
+                                     align-middle 
+                                     d-none d-md-table-cell,
+                                     align-middle d-none d-md-table-cell,
+                                     align-middle  d-none d-md-table-cell,
+                                     align-middle d-none d-md-table-cell"
                                      headerClass="text-center"
                                      rowClasses="text-center" id="tabla">
 
@@ -143,9 +143,16 @@
                         </div>
                     </div>
                 </div>
-
+                Ciudad: #{servicioMeteorologicoBean.ciudad}<br/>
+                Tiempo actual: #{servicioMeteorologicoBean.tiempo}<br/>
+                Temperatura actual: #{servicioMeteorologicoBean.temperatura} ºC<br/>
+                Humedad actual: #{servicioMeteorologicoBean.humedad} %<br/>
+                Velocidad del viento actual: #{servicioMeteorologicoBean.velocidadViento} m/s<br/>
+                Direccion del viento actual: #{servicioMeteorologicoBean.direccionViento} º<br/>
+                Porcentaje de nubes actual: #{servicioMeteorologicoBean.nubesActual} %<br/>
             </ui:define>
         </ui:composition>
+        
     </h:body>
 </html>
 
