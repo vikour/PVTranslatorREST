@@ -59,21 +59,21 @@ public class ModuloFacadeREST extends AbstractFacade<Modulo> {
 
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML + ";charset=utf-8", MediaType.APPLICATION_JSON + ";charset=utf-8"})
     public Modulo find(@PathParam("id") String id) {
         return super.find(id);
     }
 
     @GET
     @Override
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML + ";charset=utf-8", MediaType.APPLICATION_JSON + ";charset=utf-8"})
     public List<Modulo> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML + ";charset=utf-8", MediaType.APPLICATION_JSON + ";charset=utf-8"})
     public List<Modulo> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
@@ -98,7 +98,7 @@ public class ModuloFacadeREST extends AbstractFacade<Modulo> {
     
     @GET
     @Path("order/name")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML + ";charset=utf-8", MediaType.APPLICATION_JSON + ";charset=utf-8"})
     public List<Modulo> findAllOrderedByName(){
         Query q = em.createQuery("SELECT m FROM Modulo m ORDER BY m.nombre ASC");
         return q.getResultList();
@@ -106,7 +106,7 @@ public class ModuloFacadeREST extends AbstractFacade<Modulo> {
     
     @GET
     @Path("order/alpha")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML + ";charset=utf-8", MediaType.APPLICATION_JSON + ";charset=utf-8"})
     public List<Modulo> findAllOrderedByAlpha(){
         Query q = em.createQuery("SELECT m FROM Modulo m ORDER BY m.alpha");
         return q.getResultList();
@@ -114,7 +114,7 @@ public class ModuloFacadeREST extends AbstractFacade<Modulo> {
     
     @GET
     @Path("order/beta")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML + ";charset=utf-8", MediaType.APPLICATION_JSON + ";charset=utf-8"})
     public List<Modulo> findAllOrderedByBeta(){
         Query q = em.createQuery("SELECT m FROM Modulo m ORDER BY m.beta");
         return q.getResultList();
@@ -122,7 +122,7 @@ public class ModuloFacadeREST extends AbstractFacade<Modulo> {
     
     @GET
     @Path("order/kappa")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML + ";charset=utf-8", MediaType.APPLICATION_JSON + ";charset=utf-8"})
     public List<Modulo> findAllOrderedByKappa(){
         Query q = em.createQuery("SELECT m FROM Modulo m ORDER BY m.kappa");
         return q.getResultList();
@@ -130,7 +130,7 @@ public class ModuloFacadeREST extends AbstractFacade<Modulo> {
     
     @GET
     @Path("order/gamma")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML + ";charset=utf-8", MediaType.APPLICATION_JSON + ";charset=utf-8"})
     public List<Modulo> findAllOrderedByGamma(){
         Query q = em.createQuery("SELECT m FROM Modulo m ORDER BY m.gamma");
         return q.getResultList();
@@ -138,7 +138,7 @@ public class ModuloFacadeREST extends AbstractFacade<Modulo> {
     
     @GET
     @Path("campanya/{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML + ";charset=utf-8", MediaType.APPLICATION_JSON + ";charset=utf-8"})
     public List<Modulo> findModulosByNombreCampaña(@PathParam("id") String nombreCampanya){
         Query q = em.createQuery("SELECT m FROM Modulo m WHERE :n MEMBER OF (m.campanyaCollection.campanyaPK.nombre)");
         q.setParameter("n", nombreCampanya);

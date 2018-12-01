@@ -82,7 +82,7 @@ public class CampanyaFacadeREST extends AbstractFacade<Campanya> {
 
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML + ";charset=utf-8", MediaType.APPLICATION_JSON + ";charset=utf-8"})
     public Campanya find(@PathParam("id") PathSegment id) {
         es.uma.a6.entitys.CampanyaPK key = getPrimaryKey(id);
         return super.find(key);
@@ -90,14 +90,14 @@ public class CampanyaFacadeREST extends AbstractFacade<Campanya> {
 
     @GET
     @Override
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML + ";charset=utf-8", MediaType.APPLICATION_JSON + ";charset=utf-8"})
     public List<Campanya> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML + ";charset=utf-8", MediaType.APPLICATION_JSON + ";charset=utf-8"})
     public List<Campanya> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
@@ -122,7 +122,7 @@ public class CampanyaFacadeREST extends AbstractFacade<Campanya> {
   
     @GET
     @Path("order/name")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML + ";charset=utf-8", MediaType.APPLICATION_JSON + ";charset=utf-8"})
     public List<Campanya> findAllOrderedByName(){
         Query q = em.createQuery("SELECT c FROM Campanya c ORDER BY c.campanyaPK.nombre ASC");
         return q.getResultList();
@@ -130,7 +130,7 @@ public class CampanyaFacadeREST extends AbstractFacade<Campanya> {
     
     @GET
     @Path("order/date/asc")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML + ";charset=utf-8", MediaType.APPLICATION_JSON + ";charset=utf-8"})
     public List<Campanya> findAllOrderedByDateAsc(){
         Query q = em.createQuery("SELECT c FROM Campanya c ORDER BY c.fecha ASC");
         return q.getResultList();
@@ -138,7 +138,7 @@ public class CampanyaFacadeREST extends AbstractFacade<Campanya> {
     
     @GET
     @Path("order/date/dec")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML + ";charset=utf-8", MediaType.APPLICATION_JSON + ";charset=utf-8"})
     public List<Campanya> findAllOrderedByDateDesc(){
         Query q = em.createQuery("SELECT c FROM Campanya c ORDER BY c.fecha DESC");
         return q.getResultList();
@@ -146,7 +146,7 @@ public class CampanyaFacadeREST extends AbstractFacade<Campanya> {
     
     @GET
     @Path("modulo/{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML + ";charset=utf-8", MediaType.APPLICATION_JSON + ";charset=utf-8"})
     public List<Campanya> findByModulo(@PathParam("id") String nombreModulo){
         Query q = em.createQuery("SELECT c FROM Campanya c WHERE :nom = c.campanyaPK.modulo");
         q.setParameter("nom", nombreModulo);
