@@ -67,10 +67,13 @@
                 
                 <p>
                     <h:commandLink type="button" class="btn btn-primary" action="#{homeBeans.doNew()}" value="Nuevo"/>
+                    &nbsp;
+                    <h:commandLink type="button" class="btn btn-primary" action="#{homeBeans.calendar()}" value="Calendario"/>
                    
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                         Importar
                     </button>
+                    
                     <h:messages style="color: red;" />
                 </p>
                 </h:form>
