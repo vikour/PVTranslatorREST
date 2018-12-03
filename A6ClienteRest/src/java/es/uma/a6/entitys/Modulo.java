@@ -41,7 +41,7 @@ public class Modulo implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 0, max = 50)
     @Column(name = "NOMBRE")
     private String nombre;
     @Basic(optional = false)
