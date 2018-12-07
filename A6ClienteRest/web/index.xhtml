@@ -85,9 +85,7 @@
                                     </span>
                                     <span class="d-none d-md-inline-block align-middle">Borrar</span>
                                 </h:commandLink>
-
                             </h:column>
-
                         </h:dataTable>
                     </div>
 
@@ -143,16 +141,16 @@
                         </div>
                     </div>
                 </div>
-                Ciudad: #{servicioMeteorologicoBean.ciudad}<br/>
-                Tiempo actual: #{servicioMeteorologicoBean.tiempo}<br/>
-                Temperatura actual: #{servicioMeteorologicoBean.temperatura} ºC<br/>
-                Humedad actual: #{servicioMeteorologicoBean.humedad} %<br/>
-                Velocidad del viento actual: #{servicioMeteorologicoBean.velocidadViento} m/s<br/>
-                Direccion del viento actual: #{servicioMeteorologicoBean.direccionViento} º<br/>
-                Porcentaje de nubes actual: #{servicioMeteorologicoBean.nubesActual} %<br/>
+                <h:form>
+                    <h:commandLink   class="btn btn-primary"
+                                     id="botonTiempo"
+                                     value="Ver el tiempo"
+                                     action="#{servMeteo5Dias3HorasBean.verTiempo()}">
+                    </h:commandLink>
+                </h:form>
             </ui:define>
         </ui:composition>
-        
+
     </h:body>
 </html>
 
