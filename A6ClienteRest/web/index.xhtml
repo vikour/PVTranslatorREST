@@ -99,9 +99,7 @@
                             </span>
                             <span class="d-none d-md-inline-block align-middle">Nuevo</span>
                         </h:commandLink>
-                      
-                        <h:commandLink type="button" class="btn btn-primary" action="#{homeBeans.calendar()}" value="Calendario"/>
-
+                        
                         <button type="button" 
                                 class="btn btn-primary" 
                                 data-toggle="modal" 
@@ -112,6 +110,16 @@
                             <span class="d-none d-md-inline-block align-middle">Importar</span>
 
                         </button>
+                        
+                        &nbsp;
+                        <h:commandLink type="link" class="btn btn-primary rounded" 
+                                       action="#{homeBeans.calendar()}">
+                            <span class="material-icons align-middle">
+                                calendar_today
+                            </span>
+                            <span class="d-none d-md-inline-block align-middle">Calendario</span>
+                        </h:commandLink>
+                        
                         <h:messages class="alert alert-warning" />
                     </p>
                 </h:form>
