@@ -96,5 +96,9 @@ public class HomeBeans {
         return "campanyas.xhtml";
     }
 
+    public String calendar(){
+        return "calendar.xhtml";
+        
+    }
 
 }
