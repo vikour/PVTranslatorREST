@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+        <meta charset="utf-8"/>
+
+    </h:head>
+    <h:body>
+
+        <ui:composition template="resources/templates/common.xhtml">
+            <ui:define name="header">
+                <h2>Inicio de Sesión</h2>
+            </ui:define>
+            <ui:define name="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-2 ">
+                        </div>
+                        <div class="col-sm-8 ">
+
+                            <div class="form-group row"> 
+                                <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" style="margin-left: auto;margin-right: auto" ></div>
+                            </div>
+                            <script>
+                                function onSignIn(googleUser) {
+                                    // Useful data for your client-side scripts:
+                                    var profile = googleUser.getBasicProfile();
+                                    $('#apli').css('display', 'inline-block');
+                                    $('#signout').css('display', 'inline-block');
+                                    var x = profile.getEmail().toString();
+                                    document.getElementById("formId:correo").value = x;
+
+                                }
+                                ;
+                            </script> 
+                            <div class="form-group row">
+                                <a href="#" onclick="signOut();" style="display: none;margin-left: auto;margin-right: auto"
+                                   id="signout">Sign out</a>
+                            </div>         
+
+
+                            <h:form id="formId">
+                                <h:inputHidden id="correo" value="#{configurationSessionBeans.user}"/>
+                                <div class="form-group row">
+                                    <h:commandButton id="apli" value="Aplicación" class="btn btn-primary" action="#{configurationSessionBeans.goAplicacion()}"
+                                                     style="margin-left: auto;margin-right: auto">
+                                    </h:commandButton> 
+                                </div>
+
+                                <div class="form-group row">
+                                    <h:outputLabel id="error" value="#{configurationSessionBeans.error}"
+                                                   style="margin-left: auto;margin-right: auto"/>
+                                </div>
+
+
+
+                            </h:form>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <script>
+                    function signOut() {
+                        var auth2 = gapi.auth2.getAuthInstance();
+                        auth2.signOut().then(function () {
+                            $('#apli').css('display', 'none');
+                            document.getElementById("formId:error").value = "Debes iniciar sesión";
+                            location.reload();
+                        });
+                    }
+                </script> 
+
+
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+
+</html>
+

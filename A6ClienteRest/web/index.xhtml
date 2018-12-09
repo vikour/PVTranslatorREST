@@ -73,12 +73,12 @@
                             <h:column>
                                 <f:facet name="header"></f:facet>
                                 <h:commandLink class="btn btn-secondary rounded" 
-                                               action="#{homeBeans.doEditar(modulo)}">
+                                               action="#{homeBeans.doEditar(modulo)}" rendered="#{configurationSessionBeans.administrador}">
                                     <span class="material-icons align-middle">edit</span>
                                     <span class="d-none d-md-inline">Editar</span>
                                 </h:commandLink>
                                 <h:commandLink class="btn btn-danger rounded"
-                                               action="#{homeBeans.doBorrar(modulo)}" >
+                                               action="#{homeBeans.doBorrar(modulo)}" rendered="#{configurationSessionBeans.administrador}">
                                     <f:ajax render="@form" execute="@form"/>
                                     <span class="material-icons align-middle">
                                         remove
@@ -93,7 +93,7 @@
 
                     <p>
                         <h:commandLink type="link" class="btn btn-primary rounded" 
-                                       action="#{homeBeans.doNew()}">
+                                       action="#{homeBeans.doNew()}" rendered="#{configurationSessionBeans.administrador}">
                             <span class="material-icons align-middle">
                                 add
                             </span>
@@ -103,7 +103,7 @@
                         <button type="button" 
                                 class="btn btn-primary" 
                                 data-toggle="modal" 
-                                data-target="#exampleModal"> 
+                                data-target="#exampleModal" rendered="#{configurationSessionBeans.administrador}"> 
                             <span class="material-icons align-middle">
                                 import_export
                             </span>
@@ -118,6 +118,14 @@
                                 calendar_today
                             </span>
                             <span class="d-none d-md-inline-block align-middle">Calendario</span>
+                        </h:commandLink>
+                        
+                        <h:commandLink class="btn btn-secondary rounded"
+                                       action="login" >
+                            <span class="material-icons align-middle">
+                                arrow_back
+                            </span>
+                            <span class="d-none d-md-inline-block align-middle">Volver atrás</span>
                         </h:commandLink>
                         
                         <h:messages class="alert alert-warning" />
