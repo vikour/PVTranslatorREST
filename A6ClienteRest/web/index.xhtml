@@ -108,6 +108,16 @@
                             <span class="d-none d-md-inline-block align-middle">Importar</span>
 
                         </button>
+                        
+                        &nbsp;
+                        <h:commandLink type="link" class="btn btn-primary rounded" 
+                                       action="#{homeBeans.calendar()}">
+                            <span class="material-icons align-middle">
+                                calendar_today
+                            </span>
+                            <span class="d-none d-md-inline-block align-middle">Calendario</span>
+                        </h:commandLink>
+                        
                         <h:commandLink  style="margin-left: 5px" class="btn btn-primary"
                                         id="botonTiempo"
                                         action="#{servMeteo5Dias3HorasBean.verTiempo()}">
