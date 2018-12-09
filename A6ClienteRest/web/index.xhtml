@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
@@ -98,17 +99,30 @@
                             <span class="d-none d-md-inline-block align-middle">Nuevo</span>
                         </h:commandLink>
 
+
                         <button type="button" 
                                 class="btn btn-primary" 
                                 data-toggle="modal" 
-                                data-target="#exampleModal" rendered="#{configurationSessionBeans.administrador}"> 
+                                data-target="#exampleModal" > 
                             <span class="material-icons align-middle">
                                 import_export
                             </span>
                             <span class="d-none d-md-inline-block align-middle">Importar</span>
 
                         </button>
-                        
+
+
+                        <button type="button" 
+                                class="btn btn-primary" 
+                                data-toggle="modal" 
+                                data-target="#exampleModal" rendered="#{configurationSessionBeans.administrador}" > 
+                            <span class="material-icons align-middle">
+                                import_export
+                            </span>
+                            <span class="d-none d-md-inline-block align-middle">Importar</span>
+
+                        </button>
+
                         &nbsp;
                         <h:commandLink type="link" class="btn btn-primary rounded" 
                                        action="#{homeBeans.calendar()}">
@@ -117,7 +131,7 @@
                             </span>
                             <span class="d-none d-md-inline-block align-middle">Calendario</span>
                         </h:commandLink>
-                        
+
                         <h:commandLink  style="margin-left: 5px" class="btn btn-primary"
                                         id="botonTiempo"
                                         action="#{servMeteo5Dias3HorasBean.verTiempo()}">
@@ -126,7 +140,7 @@
                             </span>
                             <span class="d-none d-md-inline-block align-middle">Ver el tiempo</span>
                         </h:commandLink>
-              
+
                         <h:commandLink class="btn btn-secondary rounded"
                                        action="login" >
                             <span class="material-icons align-middle">
@@ -134,7 +148,7 @@
                             </span>
                             <span class="d-none d-md-inline-block align-middle">Volver atrás</span>
                         </h:commandLink>
-              
+
                         <h:messages class="alert alert-warning" />
                     </p>
                 </h:form>

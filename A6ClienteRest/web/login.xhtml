@@ -72,7 +72,9 @@
                         auth2.signOut().then(function () {
                             $('#apli').css('display', 'none');
                             document.getElementById("formId:error").value = "Debes iniciar sesión";
-                            location.reload();
+                             var x ="";
+                                    document.getElementById("formId:correo").value = x;
+                          
                         });
                     }
                 </script> 
