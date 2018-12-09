@@ -108,6 +108,14 @@
                             <span class="d-none d-md-inline-block align-middle">Importar</span>
 
                         </button>
+                        <h:commandLink  style="margin-left: 5px" class="btn btn-primary"
+                                        id="botonTiempo"
+                                        action="#{servMeteo5Dias3HorasBean.verTiempo()}">
+                            <span class="material-icons align-middle">
+                                wb_sunny
+                            </span>
+                            <span class="d-none d-md-inline-block align-middle">Ver el tiempo</span>
+                        </h:commandLink>
                         <h:messages class="alert alert-warning" />
                     </p>
                 </h:form>
@@ -141,13 +149,7 @@
                         </div>
                     </div>
                 </div>
-                <h:form>
-                    <h:commandLink   class="btn btn-primary"
-                                     id="botonTiempo"
-                                     value="Ver el tiempo"
-                                     action="#{servMeteo5Dias3HorasBean.verTiempo()}">
-                    </h:commandLink>
-                </h:form>
+
             </ui:define>
         </ui:composition>
 
