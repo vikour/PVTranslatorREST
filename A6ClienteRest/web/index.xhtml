@@ -99,8 +99,8 @@
                             <span class="d-none d-md-inline-block align-middle">Nuevo</span>
                         </h:commandLink>
 
-
-                        <button type="button" 
+                        <c:if test="#{configurationSessionBeans.administrador}">
+                            <button type="button" 
                                 class="btn btn-primary" 
                                 data-toggle="modal" 
                                 data-target="#exampleModal" > 
@@ -110,19 +110,8 @@
                             <span class="d-none d-md-inline-block align-middle">Importar</span>
 
                         </button>
-
-
-                        <button type="button" 
-                                class="btn btn-primary" 
-                                data-toggle="modal" 
-                                data-target="#exampleModal" rendered="#{configurationSessionBeans.administrador}" > 
-                            <span class="material-icons align-middle">
-                                import_export
-                            </span>
-                            <span class="d-none d-md-inline-block align-middle">Importar</span>
-
-                        </button>
-
+                        </c:if>
+                        
                         &nbsp;
                         <h:commandLink type="link" class="btn btn-primary rounded" 
                                        action="#{homeBeans.calendar()}">
