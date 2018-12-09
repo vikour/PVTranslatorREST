@@ -53,7 +53,7 @@
 
                         <h:column>
                             <h:form>
-                                <h:commandLink class="btn btn-danger rounded" >
+                                <h:commandLink class="btn btn-danger rounded" rendered="#{configurationSessionBeans.administrador}" >
                                     <f:ajax event="click" listener="#{campanyasBeans.doRemove(camp)}" render="tabla"/>
                                     <span class="material-icons align-middle">
                                         remove
