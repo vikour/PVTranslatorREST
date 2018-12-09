@@ -20,12 +20,12 @@
                                      var="modulo"
                                      class="table"
                                      columnClasses="align-middle,
-                                                    align-middle,
-                                                    align-middle 
-                                                    d-none d-md-table-cell,
-                                                    align-middle d-none d-md-table-cell,
-                                                    align-middle  d-none d-md-table-cell,
-                                                    align-middle d-none d-md-table-cell"
+                                     align-middle,
+                                     align-middle 
+                                     d-none d-md-table-cell,
+                                     align-middle d-none d-md-table-cell,
+                                     align-middle  d-none d-md-table-cell,
+                                     align-middle d-none d-md-table-cell"
                                      headerClass="text-center"
                                      rowClasses="text-center" id="tabla">
 
@@ -85,9 +85,7 @@
                                     </span>
                                     <span class="d-none d-md-inline-block align-middle">Borrar</span>
                                 </h:commandLink>
-
                             </h:column>
-
                         </h:dataTable>
                     </div>
 
@@ -99,7 +97,7 @@
                             </span>
                             <span class="d-none d-md-inline-block align-middle">Nuevo</span>
                         </h:commandLink>
-                        
+
                         <button type="button" 
                                 class="btn btn-primary" 
                                 data-toggle="modal" 
@@ -120,6 +118,15 @@
                             <span class="d-none d-md-inline-block align-middle">Calendario</span>
                         </h:commandLink>
                         
+                        <h:commandLink  style="margin-left: 5px" class="btn btn-primary"
+                                        id="botonTiempo"
+                                        action="#{servMeteo5Dias3HorasBean.verTiempo()}">
+                            <span class="material-icons align-middle">
+                                wb_sunny
+                            </span>
+                            <span class="d-none d-md-inline-block align-middle">Ver el tiempo</span>
+                        </h:commandLink>
+              
                         <h:commandLink class="btn btn-secondary rounded"
                                        action="login" >
                             <span class="material-icons align-middle">
@@ -127,7 +134,7 @@
                             </span>
                             <span class="d-none d-md-inline-block align-middle">Volver atrás</span>
                         </h:commandLink>
-                        
+              
                         <h:messages class="alert alert-warning" />
                     </p>
                 </h:form>
@@ -164,5 +171,7 @@
 
             </ui:define>
         </ui:composition>
+
     </h:body>
 </html>
+

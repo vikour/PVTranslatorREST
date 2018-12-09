@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="resources/templates/common.xhtml">
+            <ui:define name="header">
+                <h2>Servicio meteorológico</h2>
+            </ui:define>
+            <ui:define name="content">
+                <h:form>
+                    <div class="table-responsive no-more-than-60p">
+                        <h:dataTable id="tabla" value="#{servMeteo5Dias3HorasBean.listaMeteoDiv10}" var="meteo"
+                                     class="table"
+                                     columnClasses="align-middle,
+                                     align-middle,
+                                     align-middle d-none d-md-table-cell,
+                                     align-middle"
+                                     headerClass="text-center"
+                                     rowClasses="text-center">
+                            <h:column>
+                                <f:facet name="header"> Descripción del tiempo </f:facet>
+                                <h:outputText value="#{meteo.tiempo}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header"> Temperatura </f:facet>
+                                <h:outputText value="#{meteo.temperatura} ºC"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header"> Velocidad del viento </f:facet>
+                                <h:outputText value="#{meteo.velocidadViento} m/s"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header"> Dirección del viento </f:facet>
+                                <h:outputText value="#{meteo.direccionViento} º"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header"> Porcentaje de nubes </f:facet>
+                                <h:outputText value="#{meteo.nubesActual} %"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header"> Humedad </f:facet>
+                                <h:outputText value="#{meteo.humedad} %"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header"> Fecha </f:facet>
+                                <h:outputText value="#{meteo.fecha}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+
+                    <div style="position: relative;">
+                        <h:commandLink style="margin-right: 5px;" id="atras" type="link" class="btn btn-primary rounded" 
+                                       action="#{servMeteo5Dias3HorasBean.back()}" rendered="#{servMeteo5Dias3HorasBean.renderizarBack()}">
+                            <span class="material-icons align-middle">
+                                arrow_back
+                            </span>
+                            <span class="d-none d-md-inline-block align-middle">Fechas anteriores</span>
+                        </h:commandLink>
+                        <h:commandLink style="margin-right: 5px;" id="avanzar" type="link" class="btn btn-primary rounded" 
+                                       action="#{servMeteo5Dias3HorasBean.next()}" rendered="#{servMeteo5Dias3HorasBean.renderizarNext()}">
+
+                            <span class="d-none d-md-inline-block align-middle">Fechas posteriores</span>
+                            <span class="material-icons align-middle">
+                                arrow_forward
+                            </span>
+                        </h:commandLink>
+
+
+                        <h:link style="position: absolute; right: 0px;" class="btn btn-secondary" 
+                                id="botonAtras" 
+                                value="Atras" 
+                                outcome="index" >
+                        </h:link>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

@@ -25,6 +25,7 @@ colores, imágenes, layout, diseño adaptativo (responsive), etc.
 	Carlos Gamero
 	Alberto
 	Sergio
+	Rafael Lillo López
 
 # Hecho
 
@@ -34,4 +35,4 @@ colores, imágenes, layout, diseño adaptativo (responsive), etc.
 			- [ ] Adaptación del cliente.
 	- [ ] Diseño gráfico de la interfaz del cliente.
 	- [ ] Invesitación, diseño e implementación de Oauth.
-	- [ ] Búsqueda de App REST de terceros y estudiar como integrarlas.
+	- [x] Búsqueda de App REST de terceros y estudiar como integrarlas.
